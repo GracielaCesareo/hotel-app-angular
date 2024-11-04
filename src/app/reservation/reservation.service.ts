@@ -35,6 +35,7 @@ export class ReservationService {
    * @param reservation 
    */
   public addReservation(reservation:Reservation): void {
+    reservation.id = Date.now().toString()
     this.reservations.push(reservation);
     localStorage.setItem("reservations", JSON.stringify(this.reservations))
   }
@@ -53,8 +54,8 @@ export class ReservationService {
    * Edit reservation
    * @param updatedReservation
    */
-  public updateReservation(updatedReservation: Reservation) {
-    let index = this.reservations.findIndex(reservation => reservation.id === updatedReservation.id)
+  public updateReservation(id: string, updatedReservation: Reservation) {
+    let index = this.reservations.findIndex(reservation => reservation.id === id)
     this.reservations[index] = updatedReservation
     localStorage.setItem("reservations", JSON.stringify(this.reservations))
   }
