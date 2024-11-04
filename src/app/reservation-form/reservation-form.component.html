@@ -23,7 +23,8 @@
     <div>
         <label>Guest Email</label>
         <input type="text" formControlName="guestEmail">
-        <div *ngIf="reservationForm.get('guestEmail')?.invalid && reservationForm.get('guestEmail')?.touched">
+       <div
+          *ngIf="reservationForm.get('guestEmail')?.invalid && reservationForm.get('guestEmail')?.touched">
             Guest Email is required
         </div>
     </div>
