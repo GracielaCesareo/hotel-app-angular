@@ -2,17 +2,44 @@
 
 <h2>Reservation List</h2>
 
-<ul *ngIf="reservations.length; else noReservation">
-  <li *ngFor="let reservation of reservations">
-    Guest: {{ reservation.guestName }} <br />
-    Email: {{ reservation.guestEmail }} <br />
-    Room No: {{ reservation.roomNumber }} <br />
-    Check-In:{{ reservation.checkInDate }} <br />
-    Check-Out: {{ reservation.checkOutDate }} <br />
-    <button (click)="deleteReservation(reservation.id)">Delete</button>
-    <button [routerLink]="['/edit', reservation.id]">Edit</button>
-  </li>
-</ul>
+<div *ngIf="reservations.length; else noReservation">
+  <p-table
+    [value]="reservations"
+    styleClass="p-datatable-striped"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [paginator]="true"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Guest</th>
+        <th>Email</th>
+        <th>Room No</th>
+        <th>Check-In</th>
+        <th>Check-Out</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-reservation>
+      <tr>
+        <td>{{ reservation.guestName }}</td>
+        <td>{{ reservation.guestEmail }}</td>
+        <td>{{ reservation.roomNumber }}</td>
+        <td>{{ reservation.checkInDate | date }}</td>
+        <td>{{ reservation.checkOutDate | date }}</td>
+        <td>
+          <p-button
+            label="Delete"
+            severity="secondary"
+            (click)="deleteReservation(reservation.id)"
+          />
+          <p-button label="Edit" [routerLink]="['/edit', reservation.id]" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
 
 <ng-template #noReservation>
   <p>No reservation available</p>

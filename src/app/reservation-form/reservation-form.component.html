@@ -1,57 +1,107 @@
 <app-home></app-home>
 
-<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>Check-In Date</label>
-    <input type="Date" formControlName="checkInDate" />
-    <div
-      *ngIf="
-        reservationForm.get('checkInDate')?.invalid &&
-        reservationForm.get('checkInDate')?.touched
-      "
-    >
-      Check-In Date is required
+<div class="card p-8">
+  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+    <div class="formgrid grid p-fluid">
+      <div class="field col-6 p-3">
+        <p-floatLabel>
+          <p-calendar
+            inputId="checkInDate"
+            formControlName="checkInDate"
+            dateFormat="dd/mm/yy"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            class="w-full"
+          />
+          <label for="checkInDate">Check-In Date</label>
+        </p-floatLabel>
+        <small
+          class="p-error"
+          *ngIf="
+            reservationForm.get('checkInDate')?.invalid &&
+            reservationForm.get('checkInDate')?.touched
+          "
+        >
+          Check-In Date is required
+        </small>
+      </div>
+      <div class="field col-6 p-3">
+        <p-floatLabel>
+          <p-calendar
+            inputId="checkOutDate"
+            formControlName="checkOutDate"
+            dateFormat="dd/mm/yy"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            class="w-full"
+          />
+          <label for="checkInDate">Check-Out Date</label>
+        </p-floatLabel>
+        <small
+          class="p-error"
+          *ngIf="
+            reservationForm.get('checkOutDate')?.invalid &&
+            reservationForm.get('checkOutDate')?.touched
+          "
+        >
+          Check-Out Date is required
+        </small>
+      </div>
+      <div class="field col-6 p-3">
+        <p-floatLabel>
+          <input
+            pInputText
+            id="guestName"
+            formControlName="guestName"
+            class="w-full"
+          />
+          <label for="guestName">Guest Name</label>
+        </p-floatLabel>
+        <small
+          class="p-error"
+          *ngIf="
+            reservationForm.get('guestName')?.invalid &&
+            reservationForm.get('guestName')?.touched
+          "
+        >
+          Guest Name is required
+        </small>
+      </div>
+      <div class="field col-6 p-3">
+        <p-floatLabel>
+          <input
+            pInputText
+            inputId="guestEmail"
+            formControlName="guestEmail"
+            class="w-full"
+          />
+          <label for="guestEmail">Guest Email</label>
+        </p-floatLabel>
+        <small
+          class="p-error"
+          *ngIf="
+            reservationForm.get('guestEmail')?.invalid &&
+            reservationForm.get('guestEmail')?.touched
+          "
+        >
+          Guest Email is required
+        </small>
+      </div>
+      <div class="field col-6 p-3">
+        <p-floatLabel>
+          <p-inputNumber
+            inputId="roomNumber"
+            formControlName="roomNumber"
+            class="w-full"
+          />
+          <label for="roomNumber">Room Number</label>
+        </p-floatLabel>
+      </div>
     </div>
-  </div>
-  <div>
-    <label>Check-Out Date</label>
-    <input type="Date" formControlName="checkOutDate" />
-    <div
-      *ngIf="
-        reservationForm.get('checkOutDate')?.invalid &&
-        reservationForm.get('checkOutDate')?.touched
-      "
-    >
-      Check-Out Date is required
-    </div>
-  </div>
-  <div>
-    <label>Guest Name</label>
-    <input type="text" formControlName="guestName" />
-    <div
-      *ngIf="
-        reservationForm.get('guestName')?.invalid &&
-        reservationForm.get('guestName')?.touched
-      "
-    >
-      Guest Name is required
-    </div>
-  </div>
-  <div>
-    <label>Guest Email</label>
-    <input type="text" formControlName="guestEmail" />
-    <div
-      *ngIf="
-        reservationForm.get('guestEmail')?.invalid &&
-        reservationForm.get('guestEmail')?.touched
-      "
-    >
-      Guest Email is required
-    </div>
-  </div>
-  <div>
-    <label>Room Number</label>
-    <input type="number" formControlName="roomNumber" />
-  </div>
-  <button type="submit" [disabled]="reservationForm.invalid">Submit</button>
-</form>
+    <p-button
+      type="submit"
+      label="Submit"
+      [disabled]="reservationForm.invalid"
+    />
+  </form>
+</div>
